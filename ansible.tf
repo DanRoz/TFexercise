@@ -18,6 +18,19 @@ provider "aws" {
 
 #RESOURCES
 
+resource "aws_s3_bucket" "tfexer" {
+  bucket = "terraformexercise"
+  acl    = "public-read"
+}
+
+resource "aws_s3_bucket_object" "PutFile" {
+ bucket = "${aws_s3_bucket.tfexer.id}"
+ key    = "1.gif"
+ source = "/home/ubuntu/Downloads/1.gif"
+ acl    = "public-read"
+}
+
+
 resource "aws_instance" "nginx" {
  ami = "ami-0f65671a86f061fcd"
  instance_type = "t2.micro"
