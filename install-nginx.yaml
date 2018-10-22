@@ -22,7 +22,6 @@
     with_fileglob:
       - /tmp/TFexer/html/*.html
       - /tmp/TFexer/html/*.css
-      - /tmp/TFexer/html/*.gif
 
   - name: Restart nginx service
     service:
