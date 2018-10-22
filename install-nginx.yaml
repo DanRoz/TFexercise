@@ -1,0 +1,30 @@
+---
+- hosts: localhost
+  tasks:
+  - name: Update repos and install nginx and git
+    apt:
+      name: "{{ packages }}"
+      update_cache: yes
+    vars:
+      packages:
+      - nginx
+      - git
+
+  - name: Clone repo from git
+    git:
+      repo: 'https://github.com/danroz/TFexercise.git'
+      dest: /tmp/TFexer/html
+
+  - name: Copy html files to nginx path
+    copy:
+      src: "{{ item }}"
+      dest: /var/www/html/
+    with_fileglob:
+      - /tmp/TFexer/html/*.html
+      - /tmp/TFexer/html/*.css
+      - /tmp/TFexer/html/*.gif
+
+  - name: Restart nginx service
+    service:
+      name: nginx
+      state: restarted
