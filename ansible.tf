@@ -30,7 +30,6 @@ resource "aws_s3_bucket_object" "PutFile" {
  acl    = "public-read"
 }
 
-
 resource "aws_instance" "nginx" {
  ami               = "ami-0f65671a86f061fcd"
  instance_type     = "t2.micro"
